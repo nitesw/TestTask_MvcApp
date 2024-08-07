@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Test Task is here!" />
+    <meta name="keywords" content="HTML, CSS, JS, ASP.NET, MVC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TestTask_MvcApp</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0; 
+        }
+        body{
+            font-family: monospace;
+        }
+        header{
+            margin: 10px 0px;
+        }
+
+        .container {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .text-center{
+            text-align: center;
+        }
+        .label-style{
+            font-size: 24px;
+            font-weight: bold;     
+        }
+        .input-style{
+            padding: 4px;
+            font-size: 20px;
+            height: 24px;
+        }
+        .row{
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 10px;
+        }
+        .col{
+            display: flex;
+            flex-direction: column;
+        }
+        .col-45{
+            width: 45%;
+        }
+    </style>
+</head>
+<body>
+    <header class="container">   
+        <h1 class="text-center">Test Task Webpage</h1>
+    </header>
+
+    <div class="container">
+        <hr />
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/js/site.js" asp-append-version="true"></script> 
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
