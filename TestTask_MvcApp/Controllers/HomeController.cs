@@ -18,9 +18,14 @@ namespace TestTask_MvcApp.Controllers
         {
             return View();
         }
-        public IActionResult Create()
+
+        [HttpPost]
+        public IActionResult Create(Person model)
         {
-            return View();
+            ctx.Persons.Add(model);
+            ctx.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

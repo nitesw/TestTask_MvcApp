@@ -1,22 +1,24 @@
-﻿@* <form method="post" asp-action="Create" style="margin-top: 10px;"> *@
+﻿@model Person
+
+<form method="post" asp-action="Create" style="margin-top: 10px;">
     <div class="row">
         <div class="col col-45">
-            <label class="label-style">Name:</label>
-            <input class="input-style person-name" type="text" placeholder="Enter the name..." />
+            <label asp-for=Name class="label-style">Name:</label>
+            <input asp-for=Name class="input-style person-name" type="text" placeholder="Enter the name..." />
         </div>
         <div class="col col-45">
-            <label class="label-style">Surname:</label>
-            <input class="input-style person-surname" type="text" placeholder="Enter the surname..." />
+            <label asp-for=Surname class="label-style">Surname:</label>
+            <input asp-for=Surname class="input-style person-surname" type="text" placeholder="Enter the surname..." />
         </div>
     </div>
     <div class="row">
         <div class="col col-45">
-            <label class="label-style">Age:</label>
-            <input class="input-style person-age" type="number" min="0" max="100" placeholder="Enter the age..." value="0" />
+            <label asp-for=Age class="label-style">Age:</label>
+            <input asp-for=Age class="input-style person-age" type="number" min="0" max="100" placeholder="Enter the age..." value="0" />
         </div>
         <div class="col col-45">
-            <label class="label-style">Profession:</label>
-            <input class="input-style person-profession" type="text" placeholder="Enter the profession..." />
+            <label asp-for=Profession class="label-style">Profession:</label>
+            <input asp-for=Profession class="input-style person-profession" type="text" placeholder="Enter the profession..." />
         </div>
     </div>
     <div class="row">
@@ -27,12 +29,13 @@
             <button class="btn-style" style="background-color:lightskyblue;">Send using ASP.NET</button>
         </div>
     </div>
-@* </form> *@
+</form>
 
 <div>
     <table id="mainTable" class="table">
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Name</th>
                 <th>Surname</th>
                 <th>Age</th>
