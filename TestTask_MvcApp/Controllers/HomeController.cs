@@ -1,16 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using TestTask_MvcApp.Data;
 using TestTask_MvcApp.Models;
 
 namespace TestTask_MvcApp.Controllers
 {
     public class HomeController : Controller
-    {     
-        public HomeController()
+    {
+        private TestTaskDbContext ctx;
+
+        public HomeController(TestTaskDbContext ctx)
         {
+            this.ctx = ctx;
         }
 
         public IActionResult Index()
+        {
+            return View();
+        }
+        public IActionResult Create()
         {
             return View();
         }

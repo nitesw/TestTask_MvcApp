@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using TestTask_MvcApp.Data;
+
 namespace TestTask_MvcApp
 {
     public class Program
@@ -6,8 +9,15 @@ namespace TestTask_MvcApp
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            string? connectionString = builder.Configuration.GetConnectionString("LocalDb");
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<TestTaskDbContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
 
             var app = builder.Build();
 

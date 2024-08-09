@@ -77,6 +77,22 @@
                 "<td>" + age + "</td>" +
                 "<td>" + profession + "</td>" +
                 "</tr>";
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/Home/Create", true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(xhr.responseText);
+                }
+            }
+            var data = JSON.stringify({
+                Name: name,
+                Surname: surname,
+                Age: age,
+                Profession: profession
+            });
+            xhr.send(data);
         });
     </script>
 }
