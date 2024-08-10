@@ -16,6 +16,10 @@ namespace TestTask_MvcApp.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Persons =
+                ctx.Persons
+                .ToList();
+
             return View();
         }
 

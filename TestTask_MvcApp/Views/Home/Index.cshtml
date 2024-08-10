@@ -1,4 +1,7 @@
 ﻿@model Person
+@{
+    List<Person> persons = ViewBag.Persons;
+}
 
 <form method="post" asp-action="Create" style="margin-top: 10px;">
     <div class="row">
@@ -26,7 +29,7 @@
             <button class="btn-style jsBtn" style="background-color:darkorange;">Send using JS</button>
         </div>
         <div class="col col-45">
-            <button class="btn-style" style="background-color:lightskyblue;">Send using ASP.NET</button>
+            <button type="submit" class="btn-style" style="background-color:lightskyblue;">Send using ASP.NET</button>
         </div>
     </div>
 </form>
@@ -42,7 +45,18 @@
                 <th>Profession</th>
             </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+            @foreach (var person in persons)
+            {
+                <tr>
+                    <td>@person.Id</td>
+                    <td>@person.Name</td>
+                    <td>@person.Surname</td>
+                    <td>@person.Age</td>
+                    <td>@(person.Profession == null ? "-" : person.Profession)</td>
+                </tr>
+            }
+        </tbody>
     </table>
     <hr />
 </div>
@@ -54,37 +68,23 @@
         sendJsBtn.addEventListener("click", function (event) {
             var name = document.querySelector(".person-name").value.trim();
             var surname = document.querySelector(".person-surname").value.trim();
-            if (!name || !surname) 
-            {
+            if (!name || !surname) {
                 alert("Name and surname are required.");
                 return;
             }
 
             var age = document.querySelector(".person-age").value;
-            if (age < 0 || age > 100) 
-            {
+            if (age < 0 || age > 100) {
                 alert("The age must be between 0 and 100.");
                 return;
             }
 
             var profession = document.querySelector(".person-profession").value;
-            if(!profession)
-            {
-                profession = "-";
-            }
-
-            var table = document.getElementById("mainTable").getElementsByTagName("tbody")[0];
-            table.innerHTML += "<tr>" +
-                "<td>" + name + "</td>" +
-                "<td>" + surname + "</td>" +
-                "<td>" + age + "</td>" +
-                "<td>" + profession + "</td>" +
-                "</tr>";
 
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "/Home/Create", true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhr.onreadystatechange = function(){
+            xhr.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     console.log(xhr.responseText);
                 }
