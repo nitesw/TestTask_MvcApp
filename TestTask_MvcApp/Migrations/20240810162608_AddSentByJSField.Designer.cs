@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestTask_MvcApp.Data;
 
@@ -10,9 +11,11 @@ using TestTask_MvcApp.Data;
 namespace TestTask_MvcApp.Migrations
 {
     [DbContext(typeof(TestTaskDbContext))]
-    partial class TestTaskDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240810162608_AddSentByJSField")]
+    partial class AddSentByJSField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

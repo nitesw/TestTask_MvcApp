@@ -13,5 +13,6 @@ namespace TestTask_MvcApp.Models
         [Range(0, 100, ErrorMessage = "Age must be between 0 and 100.")]
         public int Age { get; set; }
         public string? Profession { get; set; }
+        public bool SentByJS { get; set; }
     }
 }
