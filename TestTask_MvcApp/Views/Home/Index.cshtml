@@ -7,11 +7,11 @@
     <div class="row">
         <div class="col col-45">
             <label asp-for=Name class="label-style">Name:</label>
-            <input asp-for=Name class="input-style person-name" type="text" placeholder="Enter the name..." />
+            <input asp-for=Name class="input-style person-name" type="text" placeholder="Enter the name..." required />
         </div>
         <div class="col col-45">
             <label asp-for=Surname class="label-style">Surname:</label>
-            <input asp-for=Surname class="input-style person-surname" type="text" placeholder="Enter the surname..." />
+            <input asp-for=Surname class="input-style person-surname" type="text" placeholder="Enter the surname..." required />
         </div>
     </div>
     <div class="row">
@@ -74,7 +74,7 @@
             var surname = document.querySelector(".person-surname").value.trim();
             var age = document.querySelector(".person-age").value;
             if (!name || !surname || age < 0 || age > 100) {
-                alert("Fill all required fields.");
+                alert("Fill all required fields. Age must stay between 0 and 100!");
                 return;
             }
 
