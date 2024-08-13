@@ -44,13 +44,13 @@ namespace TestTask_MvcApp.Controllers
             return View("Index");
         }
 
-
-        public IActionResult QueryData()
+        public async Task<IActionResult> QueryData()
         {
-            string sqlQuery = "SELECT * FROM Persons WHERE Id % 3 = 0";
+            var sqlFilePath = Path.Combine(Directory.GetCurrentDirectory(), "SqlQueries", "Query.sql");
+            string sqlQuery = await System.IO.File.ReadAllTextAsync(sqlFilePath);
             ViewBag.ExecutionString = sqlQuery;
 
-            var persons = ctx.Persons.FromSqlRaw(sqlQuery).ToList();
+            var persons = await ctx.Persons.FromSqlRaw(sqlQuery).ToListAsync();
 
             return View(persons);
         }
