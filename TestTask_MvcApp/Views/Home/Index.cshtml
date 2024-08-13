@@ -70,7 +70,8 @@
         <div class="col col-35">
             <button class="btn-style jsMarkupBtn" style="background-color:darkorange;">Send using JS</button>
         </div>
-        <div class="col col-35">
+        @* Try to use asp-route-content (for example) *@
+        <div class="col col-35"> 
             <button class="btn-style" style="background-color:lightskyblue;">Send using ASP.NET</button>
         </div>
         <div class="col col-20">
@@ -84,6 +85,7 @@
 @section Scripts {
     <script>
         var sendJsBtn = document.querySelector(".jsBtn");
+        // var counter = 1;
         sendJsBtn.addEventListener("click", function (event) {
             event.preventDefault();
 
@@ -97,6 +99,39 @@
 
             var profession = document.querySelector(".person-profession").value;
 
+            // The first way (just passing it to tbody (won't be added to db))
+            @* var tbody = document.querySelector(".table tbody");
+            var tr = document.createElement("tr");
+
+            var td1 = document.createElement("td");
+            td1.innerText = @persons.Count + ++counter;
+            tr.appendChild(td1);
+
+            var td2 = document.createElement("td");
+            td2.innerText = name;
+            tr.appendChild(td2);
+
+            var td3 = document.createElement("td");
+            td3.innerText = surname;
+            tr.appendChild(td3);
+
+            var td4 = document.createElement("td");
+            td4.innerText = age;
+            tr.appendChild(td4);
+
+            var td5 = document.createElement("td");
+            td5.innerText = (profession == null || profession === "") ? "-" : profession;
+            tr.appendChild(td5);
+
+            var td6 = document.createElement("td");
+            td6.innerText = "JavaScript";
+            td6.style.fontWeight = "700";
+            td6.style.backgroundColor = "darkorange";
+            tr.appendChild(td6);
+
+            tbody.appendChild(tr); *@
+
+            // The second way (using XMLHttpRequest and passing it to CreateJavaScript action (will be added to db))
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "/Home/CreateJavaScript", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -112,10 +147,10 @@
                 }
             };
 
-            var data = "name=" + encodeURIComponent(name) +
-                "&surname=" + encodeURIComponent(surname) +
-                "&age=" + encodeURIComponent(age) +
-                "&profession=" + encodeURIComponent(profession);
+            var data = "name=" + name +
+                "&surname=" + surname +
+                "&age=" + age +
+                "&profession=" + profession;
             xhr.send(data);
         });
 
