@@ -34,6 +34,16 @@ namespace TestTask_MvcApp.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public IActionResult HtmlMarkup(string markup)
+        {
+            var persons = ctx.Persons.ToList();
+            ViewBag.Persons = persons;
+            ViewBag.HtmlMarkup = markup;
+
+            return View("Index");
+        }
+
 
         public IActionResult QueryData()
         {

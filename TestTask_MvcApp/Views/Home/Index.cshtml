@@ -65,23 +65,27 @@
 
 <div style="margin-top: 10px;">
     <h2>Enter your HTML markup here</h2>
-    <textarea style="width: 100%; height: 100px;" id="enteredHtml"></textarea>
-    <div class="row">
-        <div class="col col-35">
-            <button class="btn-style jsMarkupBtn" style="background-color:darkorange;">Send using JS</button>
+    <form method="post" asp-action="HtmlMarkup">
+        <textarea style="width: 100%; height: 100px;" id="enteredHtml" name="markup">@(ViewBag.HtmlMarkup == null ? "" : ViewBag.HtmlMarkup)</textarea>
+
+        <div class="row">
+            <div class="col col-35">
+                <button type="button" class="btn-style jsMarkupBtn" style="background-color:darkorange;">Send using JS</button>
+            </div>
+            <div class="col col-35">
+                <button type="submit" class="btn-style" style="background-color:lightskyblue;">Send using ASP.NET</button>
+            </div>
+            <div class="col col-20">
+                <button type="button" class="btn-style clearMarkup" style="background-color:orangered;">Clear markup</button>
+            </div>
         </div>
-        @* Try to use asp-route-content (for example) *@
-        <div class="col col-35"> 
-            <button class="btn-style" style="background-color:lightskyblue;">Send using ASP.NET</button>
-        </div>
-        <div class="col col-20">
-            <button class="btn-style clearMarkup" style="background-color:orangered;">Clear markup</button>
-        </div>
-    </div>
+    </form>
 </div>
 <h2 style="margin-top: 20px;">Your HTML markup will be displayed here</h2>
-<div id="displayHtml" style="border: 1px solid black; height: 100px; margin-bottom: 10px; padding: 10px;"></div>
-<hr />
+<div id="displayHtml" style="border: 1px solid black; height: 100px; margin-bottom: 10px; padding: 10px;">
+    @Html.Raw(ViewBag.HtmlMarkup ?? "")
+</div>
+
 
 <div style="margin:20px 0px;">
     <h2 style="margin-bottom:10px;">Execute the SQL query</h2>
@@ -146,7 +150,7 @@
                 if (xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300) {
                     var response = JSON.parse(xhr.responseText);
                     if (response.success) {
-                        window.location.reload();
+                        window.location.href = '/';
                     } else {
                         alert("Error saving data.");
                     }
@@ -158,16 +162,19 @@
                 "&age=" + age +
                 "&profession=" + profession;
             xhr.send(data);
+            
         });
 
         var sendJsMarkupBtn = document.querySelector(".jsMarkupBtn");
         var display = document.getElementById("displayHtml");
         var entered = document.getElementById("enteredHtml");
-        sendJsMarkupBtn.addEventListener("click", function () {
+        sendJsMarkupBtn.addEventListener("click", function (event) {
+            event.preventDefault();
             display.innerHTML = entered.value;
         });
         var clearMarkup = document.querySelector(".clearMarkup");
-        clearMarkup.addEventListener("click", function () {
+        clearMarkup.addEventListener("click", function (event) {
+            event.preventDefault();
             display.innerHTML = "";
             entered.value = "";
         });
