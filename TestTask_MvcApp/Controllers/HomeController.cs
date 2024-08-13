@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using TestTask_MvcApp.Data;
 using TestTask_MvcApp.Models;
@@ -34,6 +35,15 @@ namespace TestTask_MvcApp.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult QueryData()
+        {
+            string sqlQuery = "SELECT * FROM Persons WHERE Id % 3 = 0";
+            ViewBag.ExecutionString = sqlQuery;
+
+            var persons = ctx.Persons.FromSqlRaw(sqlQuery).ToList();
+
+            return View(persons);
+        }
 
         [HttpPost]
         public IActionResult CreateJavaScript(string name, string surname, int age, string profession)

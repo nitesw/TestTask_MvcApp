@@ -1,0 +1,40 @@
+﻿@model List<Person>
+@{
+    var executionString = ViewBag.ExecutionString;
+}
+
+<div style="margin:20px 0px;">
+    <div class="text-center" style="display:flex;flex-direction:column;">
+        <h1>Executed SQL query</h1>
+        <h2>@executionString</h2>
+    </div>
+    <table class="table" style="margin-top:10px;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Age</th>
+                <th>Profession</th>
+                <th>Sent By</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in Model)
+            {
+                <tr>
+                    <td>@person.Id</td>
+                    <td>@person.Name</td>
+                    <td>@person.Surname</td>
+                    <td>@person.Age</td>
+                    <td>@(person.Profession == null ? "-" : person.Profession)</td>
+                    <td style="font-weight: 700; @(person.SentByJS == true ? "background-color: darkorange;" : "background-color:lightskyblue;")">@(person.SentByJS == true ? "JavaScript" : "Asp.Net")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <a asp-controller="Home" asp-action="Index" class="btn-style" style="text-decoration:none;color:black;background-color:lightgreen;">Go Back</a>
+</div>
